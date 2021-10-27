@@ -1,0 +1,63 @@
+name: GitHub Clone Count for 14 days at every 8 hours
+
+# Controls when the action will run. 
+on:
+  schedule:
+    - cron: "0 */8 * * *"
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  traffic-clones:
+    runs-on: ubuntu-latest
+
+    env:
+      traffic_clones_json: traffic/clones.json
+      traffic_clones_accum_json: traffic/clones-accum.json
+
+    steps:
+      - name: allocate directories
+        run: |
+          mkdir $GITHUB_WORKSPACE/gh-workflow $GITHUB_WORKSPACE/gh-stats
+
+      - name: checkout gh-workflow
+        uses: actions/checkout@v2
+        with:
+          repository: '{{REPO_OWNER}}/gh-workflow'
+          path: gh-workflow
+
+      - name: checkout gh-stats
+        uses: actions/checkout@v2
+        with:
+          repository: '{{REPO_OWNER}}/{{REPO}}--gh-stats'
+          path: gh-stats
+          token: ${{ secrets.SECRET_TOKEN }}
+
+      - name: request traffic clones json
+        run: |
+          curl --user "${{ github.actor }}:${{ secrets.SECRET_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/{{REPO_OWNER}}/{{REPO}}/traffic/clones \
+            > "$GITHUB_WORKSPACE/gh-stats/$traffic_clones_json"
+
+      - name: accumulate traffic clones
+        shell: bash
+        run: |
+          cd $GITHUB_WORKSPACE/gh-stats
+          chmod ug+x $GITHUB_WORKSPACE/gh-workflow/bash/accum-traffic-clones.sh
+          $GITHUB_WORKSPACE/gh-workflow/bash/accum-traffic-clones.sh
+
+      - name: commit gh-stats
+        run: |
+          cd $GITHUB_WORKSPACE/gh-stats
+          git add .
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git commit -m "Automated traffic/clones update"
+
+      - name: push gh-stats
+        uses: ad-m/github-push-action@master
+        with:
+          repository: '{{REPO_OWNER}}/{{REPO}}--gh-stats'
+          directory: gh-stats
+          github_token: ${{ secrets.SECRET_TOKEN }}
