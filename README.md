@@ -3,7 +3,7 @@
 With some advantages:
 
 1. Repository to track and repository to store traffic statistic are different
-2. Workflow is used [accum-traffic-clones.sh](https://github.com/andry81/gh-workflow/blob/master/bash/accum-traffic-clones.sh) bash script to accumulate traffic clones
+2. Workflow is used [accum-traffic-clones.sh](https://github.com/andry81/gh-workflow/blob/master/bash/github/accum-traffic-clones.sh) bash script to accumulate traffic clones
 
 You need 3 repositories:
 
@@ -85,8 +85,8 @@ jobs:
         shell: bash
         run: |
           cd $GITHUB_WORKSPACE/gh-stats
-          chmod ug+x $GITHUB_WORKSPACE/gh-workflow/bash/accum-traffic-clones.sh
-          $GITHUB_WORKSPACE/gh-workflow/bash/accum-traffic-clones.sh
+          chmod ug+x $GITHUB_WORKSPACE/gh-workflow/bash/github/accum-traffic-clones.sh
+          $GITHUB_WORKSPACE/gh-workflow/bash/github/accum-traffic-clones.sh
 
       - name: commit gh-stats
         run: |
