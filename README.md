@@ -27,9 +27,11 @@ The `myrepo--gh-stats` repository should contain 1 file:
 
 ```
 {
-  "timestamp" : "0000-00-00T00:00:00Z",
+  "count_outdated" : 0,
+  "uniques_outdated" : 0,
   "count" : 0,
-  "uniques" : 0
+  "uniques" : 0,
+  "clones" : []
 }
 ```
 
