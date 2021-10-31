@@ -2,8 +2,9 @@
 
 With some advantages:
 
-1. Repository to track and repository to store traffic statistic are different
+1. Repository to track and repository to store traffic statistic are different, and you may directly point the statistic as commits list: `https://github.com/{{REPO_OWNER}}/{{REPO}}--gh-stats/commits/master/traffic/clones`
 2. Workflow is used [accum-traffic-clones.sh](https://github.com/andry81/gh-workflow/blob/master/bash/github/accum-traffic-clones.sh) bash script to accumulate traffic clones
+3. The script accumulates statistic both into a single file and into a set of files grouped by year and allocated per day: `traffic/clones/by_year/YYYY-MM-DD.json`
 
 You need 3 repositories:
 
@@ -23,7 +24,7 @@ To attach PAT: https://docs.github.com/en/actions/reference/encrypted-secrets#cr
 
 The `myrepo--gh-stats` repository should contain 1 file:
 
-`traffic/clones-accum.json`:
+`traffic/clones/latest-accum.json`:
 
 ```
 {
@@ -55,10 +56,14 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      traffic_clones_json: traffic/clones.json
-      traffic_clones_accum_json: traffic/clones-accum.json
+      traffic_clones_dir: traffic/clones
 
     steps:
+      # step is required to workaround variable expansion in variables
+      - name: declare dependent variables
+        run: |
+          echo "traffic_clones_json=$traffic_clones_dir/latest.json" >> $GITHUB_ENV
+
       - name: allocate directories
         run: |
           mkdir $GITHUB_WORKSPACE/gh-workflow $GITHUB_WORKSPACE/gh-stats
@@ -117,7 +122,11 @@ After that all badges must start to work:
 
 ```
 <p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/dynamic/json?color=success&label=Github%20clones|all&query=count&url=https://github.com/{{REPO_OWNER}}/{{REPO}}--gh-stats/raw/master/traffic/clones-accum.json?raw=True&logo=github" valign="middle" alt="GitHub clones|all" /></a>
-• <a href="#"><img src="https://img.shields.io/badge/dynamic/json?color=success&label=Github%20clones|unq&query=uniques&url=https://github.com/{{REPO_OWNER}}/{{REPO}}--gh-stats/raw/master/traffic/clones-accum.json?raw=True&logo=github" valign="middle" alt="GitHub clones|unique per day" /></a>
+  <a href="https://github.com/{{REPO_OWNER}}/{{REPO}}--gh-stats/commits/master/traffic/clones">
+    <img src="https://img.shields.io/badge/dynamic/json?color=success&label=Github%20clones|all&query=count&url=https://github.com/{{REPO_OWNER}}/{{REPO}}--gh-stats/raw/master/traffic/clones/latest-accum.json?raw=True&logo=github" valign="middle" alt="GitHub clones|all" />
+  </a>
+• <a href="https://github.com/{{REPO_OWNER}}/{{REPO}}--gh-stats/commits/master/traffic/clones">
+    <img src="https://img.shields.io/badge/dynamic/json?color=success&label=Github%20clones|unq&query=uniques&url=https://github.com/{{REPO_OWNER}}/{{REPO}}--gh-stats/raw/master/traffic/clones/latest-accum.json?raw=True&logo=github" valign="middle" alt="GitHub clones|unique per day" />
+  </a>
 </p>
 ```
