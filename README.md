@@ -38,78 +38,9 @@ The `myrepo--gh-stats` repository should contain 1 file:
 
 The `myrepo` repository should contain 1 file:
 
-`.github/workflows/myrepo-gh-clone-stats.yml`:
+[.github/workflows/myrepo-gh-clone-stats.yml](https://github.com/andry81/github-clone-count-badge/blob/master/.github/workflows/myrepo-gh-clone-stats.yml)
 
-(The actual example can be taken here: [tacklebar-gh-clone-stats.yml](https://github.com/andry81/tacklebar/blob/trunk/.github/workflows/tacklebar-gh-clone-stats.yml))
-
-```yaml
-name: GitHub clones counter for 14 days at every 8 hours and clones accumulator
-
-on:
-  schedule:
-    - cron: "0 */8 * * *"
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-jobs:
-  traffic-clones:
-    runs-on: ubuntu-latest
-
-    env:
-      traffic_clones_dir: traffic/clones
-
-    steps:
-      # step is required to workaround variable expansion in variables
-      - name: declare dependent variables
-        run: |
-          echo "traffic_clones_json=$traffic_clones_dir/latest.json" >> $GITHUB_ENV
-
-      - name: allocate directories
-        run: |
-          mkdir $GITHUB_WORKSPACE/gh-workflow $GITHUB_WORKSPACE/gh-stats
-
-      - name: checkout gh-workflow
-        uses: actions/checkout@v2
-        with:
-          repository: '{{REPO_OWNER}}/gh-workflow'
-          path: gh-workflow
-
-      - name: checkout gh-stats
-        uses: actions/checkout@v2
-        with:
-          repository: '{{REPO_OWNER}}/{{REPO}}--gh-stats'
-          path: gh-stats
-          token: ${{ secrets.SECRET_TOKEN }}
-
-      - name: request traffic clones json
-        run: |
-          curl --user "${{ github.actor }}:${{ secrets.SECRET_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/{{REPO_OWNER}}/{{REPO}}/traffic/clones \
-            > "$GITHUB_WORKSPACE/gh-stats/$traffic_clones_json"
-
-      - name: accumulate traffic clones
-        shell: bash
-        run: |
-          cd $GITHUB_WORKSPACE/gh-stats
-          chmod ug+x $GITHUB_WORKSPACE/gh-workflow/bash/github/accum-traffic-clones.sh
-          $GITHUB_WORKSPACE/gh-workflow/bash/github/accum-traffic-clones.sh
-
-      - name: commit gh-stats
-        run: |
-          cd $GITHUB_WORKSPACE/gh-stats
-          git add .
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
-          git commit -m "Automated traffic/clones update"
-
-      - name: push gh-stats
-        uses: ad-m/github-push-action@master
-        with:
-          repository: '{{REPO_OWNER}}/{{REPO}}--gh-stats'
-          directory: gh-stats
-          github_token: ${{ secrets.SECRET_TOKEN }}
-```
+The actual example can be taken from here: [tacklebar-gh-clone-stats.yml](https://github.com/andry81/tacklebar/blob/trunk/.github/workflows/tacklebar-gh-clone-stats.yml)
 
 :warning: You must replace all placeholder into respective values:
 
