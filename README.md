@@ -21,10 +21,11 @@ You need 3 repositories:
 3. Repository, where to store github workflow scripts: `gh-workflow`.<br>
    You can fork it from here: https://github.com/andry81/gh-workflow
 
-You need to attach a personal access token (PAT) into 2 repositories, one in each for the push permission (`repo`->`public_repo`):
+You need to attach a personal access token (PAT) into the repository being requested for statistic and obtain the push permission (`repo`->`public_repo`):
 
 * `myrepo` -> `SECRET_TOKEN`
-* `myrepo--gh-stats` -> `SECRET_TOKEN`
+
+> :information_source: The `myrepo--gh-stats` repository does not require a separate PAT token.
 
 To generate PAT: https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
 
