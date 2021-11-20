@@ -12,7 +12,7 @@ With some advantages:
 
 1. Repository to track and repository to store traffic statistic are different, and you may directly point the statistic as commits list: `https://github.com/{{REPO_OWNER}}/{{REPO}}--gh-stats/commits/master/traffic/clones`
 2. Workflow is used [accum-traffic-clones.sh](https://github.com/andry81/gh-workflow/blob/master/bash/github/accum-traffic-clones.sh) bash script to accumulate traffic clones
-3. The script accumulates statistic both into a single file and into a set of files grouped by year and allocated per day: `traffic/clones/by_year/YYYY-MM-DD.json`
+3. The script accumulates statistic both into a single file and into a set of files grouped by year and allocated per day: `traffic/clones/by_year/YYYY/YYYY-MM-DD.json`
 
 You need 3 repositories:
 
