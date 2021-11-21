@@ -25,7 +25,7 @@ You need to attach a personal access token (PAT) into the repository being reque
 
 * `myrepo` -> `SECRET_TOKEN`
 
-> :information_source: The `myrepo--gh-stats` repository does not require a separate PAT token.
+> :information_source: The `myrepo--gh-stats` repository does not require a separate PAT token as long as it is owned by the same repository owner.
 
 To generate PAT: https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
 
@@ -58,7 +58,7 @@ The actual example can be taken from here: [tacklebar-gh-clone-stats.yml](https:
 
 After the github workflow yaml file is commited and pushed, you can run the action from the `Actions` tab in the `myrepo` repository.
 
-After that all badges must start to work:
+After that you can add badges to reference a repository statistic:
 
 ```
 <p align="center">
