@@ -8,10 +8,12 @@
 
 > This implementation is based on that: https://github.com/MShawon/github-clone-count-badge
 
+> :warning: Implementation is marked as obsolete, there is a better approach with GitHub composite actions: https://github.com/andry81/github-accum-stats
+
 With some advantages:
 
 1. Repository to track and repository to store traffic statistic are different, and you may directly point the statistic as commits list: `https://github.com/{{REPO_OWNER}}/{{REPO}}--gh-stats/commits/master/traffic/clones`
-2. Workflow is used [accum-traffic-clones.sh](https://github.com/andry81/gh-workflow/blob/master/bash/github/accum-traffic-clones.sh) bash script to accumulate traffic clones
+2. Workflow is used [accum-traffic-clones.sh](https://github.com/andry81/gh-workflow/blob/master/bash/~obsolete/github/accum-traffic-clones.sh) bash script to accumulate traffic clones
 3. The script accumulates statistic both into a single file and into a set of files grouped by year and allocated per day: `traffic/clones/by_year/YYYY/YYYY-MM-DD.json`
 
 You need 3 repositories:
@@ -49,9 +51,7 @@ The `myrepo` repository should contain 1 file:
 
 [.github/workflows/myrepo-gh-clone-stats.yml](https://github.com/andry81/github-clone-count-badge/blob/master/.github/workflows/myrepo-gh-clone-stats.yml)
 
-The actual example can be taken from here: [tacklebar-gh-clone-stats.yml](https://github.com/andry81/tacklebar/blob/trunk/.github/workflows/tacklebar-gh-clone-stats.yml)
-
-:warning: You must replace all placeholder into respective values:
+> :warning: You must replace all placeholder into respective values:
 
 * `{{REPO_OWNER}}` -> repository owner
 * `{{REPO}}` -> `myrepo`
