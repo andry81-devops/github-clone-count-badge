@@ -25,7 +25,7 @@ You need 3 repositories:
 
 You need to attach a personal access token (PAT) into the repository being requested for statistic and obtain the push permission (`repo`->`public_repo`):
 
-* `myrepo` -> `SECRET_TOKEN`
+* `myrepo` -> `READ_STATS_TOKEN`
 
 > :information_source: The `myrepo--gh-stats` repository does not require a separate PAT token as long as it is owned by the same repository owner.
 
