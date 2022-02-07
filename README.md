@@ -8,12 +8,12 @@
 
 > This implementation is based on that: https://github.com/MShawon/github-clone-count-badge
 
-> :warning: Implementation is marked as obsolete, there is a better approach with GitHub composite actions: https://github.com/andry81/github-accum-stats
+> :warning: Implementation is marked as obsolete, there is a better approach with GitHub composite actions: https://github.com/andry81-devops/github-accum-stats
 
 With some advantages:
 
 1. Repository to track and repository to store traffic statistic are different, and you may directly point the statistic as commits list: `https://github.com/{{REPO_OWNER}}/{{REPO}}--gh-stats/commits/master/traffic/clones`
-2. Workflow is used [accum-traffic-clones.sh](https://github.com/andry81/gh-workflow/blob/3ae1a8f3c0adb04884799d733ff336f4e6f18b5d/bash/~obsolete/github/accum-traffic-clones.sh) bash script to accumulate traffic clones
+2. Workflow is used [accum-traffic-clones.sh](https://github.com/andry81-devops/gh-workflow/blob/3ae1a8f3c0adb04884799d733ff336f4e6f18b5d/bash/~obsolete/github/accum-traffic-clones.sh) bash script to accumulate traffic clones
 3. The script accumulates statistic both into a single file and into a set of files grouped by year and allocated per day: `traffic/clones/by_year/YYYY/YYYY-MM-DD.json`
 
 You need 3 repositories:
@@ -21,7 +21,7 @@ You need 3 repositories:
 1. Repository which clone statistic you want to track: `myrepo`
 2. Repository, where clone statistic will be saved: `myrepo--gh-stats`
 3. Repository, where to store github workflow scripts: `gh-workflow`.<br>
-   You can fork it from here: https://github.com/andry81/gh-workflow
+   You can fork it from here: https://github.com/andry81-devops/gh-workflow
 
 You need to attach a personal access token (PAT) into the repository being requested for statistic and obtain the push permission (`repo`->`public_repo`):
 
@@ -49,7 +49,7 @@ The `myrepo--gh-stats` repository should contain 1 file:
 
 The `myrepo` repository should contain 1 file:
 
-[.github/workflows/myrepo-gh-clone-stats.yml](https://github.com/andry81/github-clone-count-badge/blob/master/.github/workflows/myrepo-gh-clone-stats.yml)
+[.github/workflows/myrepo-gh-clone-stats.yml](https://github.com/andry81-devops/github-clone-count-badge/blob/master/.github/workflows/myrepo-gh-clone-stats.yml)
 
 > :warning: You must replace all placeholder into respective values:
 
