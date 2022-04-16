@@ -4,6 +4,10 @@
 </p>
 <!-- -->
 
+<p align="center">
+  <a href="https://github.com/andry81/donate"><img src="https://github.com/andry81/andry81/raw/master/badges/donate.svg" valign="middle" alt="donate" /></a>
+</p>
+
 ---
 
 > This implementation is based on that: https://github.com/MShawon/github-clone-count-badge
@@ -49,7 +53,7 @@ The `myrepo--gh-stats` repository should contain 1 file:
 
 The `myrepo` repository should contain 1 file:
 
-[.github/workflows/myrepo-gh-clone-stats.yml](https://github.com/andry81-devops/github-clone-count-badge/blob/master/.github/workflows/myrepo-gh-clone-stats.yml)
+[.github/workflows/myrepo-gh-clone-stats.yml](https://github.com/andry81-devops/github-clone-count-badge/blob/379a1ad31d4828c60406a6c1d0b325bea7ae1915/.github/workflows/myrepo-gh-clone-stats.yml)
 
 > :warning: You must replace all placeholder into respective values:
 
