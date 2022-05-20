@@ -24,7 +24,7 @@
 
 > This implementation is based on that: https://github.com/MShawon/github-clone-count-badge
 
-> :warning: Implementation is marked as obsolete, there is a better approach with GitHub composite actions: https://github.com/andry81-devops/github-accum-stats
+> **Warning** Implementation is marked as obsolete, there is a better approach with GitHub composite actions: https://github.com/andry81-devops/github-accum-stats
 
 With some advantages:
 
@@ -43,7 +43,7 @@ You need to attach a personal access token (PAT) into the repository being reque
 
 * `myrepo` -> `READ_STATS_TOKEN`
 
-> :information_source: The `myrepo--gh-stats` repository does not require a separate PAT token as long as it is owned by the same repository owner.
+> **Note** The `myrepo--gh-stats` repository does not require a separate PAT token as long as it is owned by the same repository owner.
 
 To generate PAT: https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
 
@@ -67,7 +67,7 @@ The `myrepo` repository should contain 1 file:
 
 [.github/workflows/myrepo-gh-clone-stats.yml](https://github.com/andry81-devops/github-clone-count-badge/blob/379a1ad31d4828c60406a6c1d0b325bea7ae1915/.github/workflows/myrepo-gh-clone-stats.yml)
 
-> :warning: You must replace all placeholder into respective values:
+> **Warning** You must replace all placeholder into respective values:
 
 * `{{REPO_OWNER}}` -> repository owner
 * `{{REPO}}` -> `myrepo`
